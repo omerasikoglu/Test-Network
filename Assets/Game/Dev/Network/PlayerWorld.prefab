@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 2759518336494068181}
   - component: {fileID: 5005440204932359863}
   - component: {fileID: 1350506016137767906}
-  - component: {fileID: 5587583032118297198}
+  - component: {fileID: 8767280220726230047}
   m_Layer: 0
-  m_Name: PlayerNetwork
+  m_Name: PlayerWorld
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -142,7 +142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
---- !u!114 &5587583032118297198
+--- !u!114 &8767280220726230047
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -151,7 +151,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2759518336494068183}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
+  m_Script: {fileID: 11500000, guid: 1c94eb3b3f30464c936afb051761dd6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   UseUnreliableDeltas: 0
