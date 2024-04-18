@@ -25,7 +25,7 @@ namespace Economy{
 
   #region Indexer
     public int this[Currency currency]{
-      get => currencyAmountDic.ContainsKey(currency) ? currencyAmountDic[currency] : 0;
+      get => currencyAmountDic.ContainsKey(currency) ? currencyAmountDic[currency] : default;
       private set{
         currencyAmountDic[currency] = value;
         OnMoneyChanged?.Invoke(this, new OnMoneyChangedEventArgs

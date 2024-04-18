@@ -7,11 +7,15 @@ namespace SystemSpace{
 
     AsyncOperation currentLevelLoadOperation;
 
-    string currentLevelSceneName = string.Empty;
+    string          currentLevelSceneName = string.Empty;
+    readonly string startingLevelName     = "Level01";
+    readonly int    startingLevelNumber   = 1;
 
+    public int  CurrentLevel  {get; private set;}
     public bool IsLevelCreated{get; private set;}
 
     public LevelLoader(int levelNumber = 1){
+      CurrentLevel = levelNumber;
       LoadLevel(levelNumber);
     }
 
@@ -20,15 +24,26 @@ namespace SystemSpace{
       if (currentLevelLoadOperation != null) return;
 
       string levelSceneName = "Level" + levelNumber.ToString("D2");
+      IsValidLevel(ref levelSceneName);
 
       currentLevelLoadOperation = SceneManager.LoadSceneAsync(levelSceneName, LoadSceneMode.Additive);
 
       currentLevelLoadOperation.completed += op => {
-        currentLevelSceneName = levelSceneName;
-        SceneManager.SetActiveScene(SceneManager.GetSceneByName(levelSceneName));
+        currentLevelSceneName     = levelSceneName;
         IsLevelCreated            = true;
         currentLevelLoadOperation = null;
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName(levelSceneName));
       };
+    }
+
+    void IsValidLevel(ref string levelSceneName){
+      if (SceneUtility.GetBuildIndexByScenePath(levelSceneName) == -1){
+        levelSceneName = startingLevelName;
+        CurrentLevel   = startingLevelNumber;
+      }
+      else{
+        CurrentLevel++;
+      }
     }
 
     public void UnloadCurrentLevel(){
@@ -37,6 +52,11 @@ namespace SystemSpace{
       SceneManager.UnloadSceneAsync(currentLevelSceneName);
       IsLevelCreated        = false;
       currentLevelSceneName = string.Empty;
+    }
+
+    public void LoadNextLevel(){
+      LoadLevel(CurrentLevel + 1);
+      Debug.Log(CurrentLevel);
     }
 
   }
